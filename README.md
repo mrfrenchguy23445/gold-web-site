@@ -3,8 +3,6 @@
 The landing page for [Gold-Web](https://github.com/mrfrenchguy23445/gold-web),
 a gaming and privacy browser for the desktop.
 
-Live at **https://mrfrenchguy23445.github.io/gold-web-site/**.
-
 One static page. No build step, no framework, no external requests. Open
 `index.html` directly, or serve the folder:
 
@@ -30,8 +28,10 @@ re-copy them so the website keeps matching the browser.
 
 ## Publishing
 
-Served by GitHub Pages from the repository root. All asset paths are relative,
-so the site also works from any static host, or straight off disk.
+Static: no build step, no server, and relative asset paths that work straight
+off disk, so any host will do. It runs on **Cloudflare Pages**, connected to
+this repository on `main` with no build command and the output directory set to
+`/`, served on the custom domain **goldweb.dev**.
 
 ## Editing
 
