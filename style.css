@@ -395,6 +395,46 @@ ul.crosses li::before {
   white-space: pre;
 }
 
+/* Authors --------------------------------------------------------------- */
+.authors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-7);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 180px;
+  text-align: center;
+}
+.author__pic {
+  display: block;
+  width: 112px;
+  height: 112px;
+  border: 2px solid var(--border-strong);
+  border-radius: var(--r-pill);
+  background: var(--bg-raised);
+  object-fit: cover;
+  transition: border-color var(--t-fast) var(--ease);
+}
+.author:hover .author__pic { border-color: var(--accent); }
+.author__name {
+  margin: var(--sp-2) 0 0;
+  color: var(--text-primary);
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+.author__bio {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+}
+
 /* Footer ---------------------------------------------------------------- */
 .foot {
   padding: var(--sp-7) 0;
