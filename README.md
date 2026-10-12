@@ -3,6 +3,8 @@
 The landing page for [Gold-Web](https://github.com/mrfrenchguy23445/gold-web),
 a gaming and privacy browser for the desktop.
 
+Live at **https://mrfrenchguy23445.github.io/gold-web-site/**.
+
 One static page. No build step, no framework, no external requests. Open
 `index.html` directly, or serve the folder:
 
