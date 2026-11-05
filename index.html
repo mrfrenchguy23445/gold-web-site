@@ -1,199 +1,293 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gold Web</title>
-<meta name="description" content="Gold-Web is the best desktop browser.">
-<meta name="color-scheme" content="dark">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/tokens.css">
-<link rel="stylesheet" href="style.css">
-<meta property="og:title" content="Gold-Web">
-<meta property="og:description" content="A gaming and privacy browser.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://goldweb.dev/">
-<meta property="og:image" content="https://goldweb.dev/assets/goldweb.png">
-<link rel="canonical" href="https://goldweb.dev/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gold-Web</title>
+  <meta name="description" content="Gold-Web is a gaming and privacy browser.">
+  <meta name="color-scheme" content="dark light">
+  <script>(function(){var t="dark";try{t=localStorage.getItem("gw-theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark")}catch(e){}document.documentElement.setAttribute("data-theme",t)})()</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Redaction:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='7' y='7' width='10' height='10' rx='2' transform='rotate(45 12 12)' fill='%23e0b84c'/%3E%3C/svg%3E">
+  <style>
+    :root{
+      --void:#000;--surface:#0a0a0a;--raised:#141414;--line:#242424;
+      --text:#f5f5f5;--dim:#a3a3a3;--accent-base:#e0b84c;--accent:var(--accent-base);--on-accent:#000;
+      --display:"Nunito",ui-rounded,"SF Pro Rounded","Segoe UI",system-ui,sans-serif;
+      --serif:"Redaction",Georgia,"Iowan Old Style","Times New Roman",serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+      box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+    }
+    :root[data-theme="light"]{--void:#fafaf7;--surface:#f0efe9;--raised:#e6e5dd;--line:#d4d2c8;--text:#111;--dim:#5c5c55;--on-accent:#fff;--accent:color-mix(in srgb,var(--accent-base) 62%,#000)}
+    html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth;height:auto}
+    *,*::before,*::after{box-sizing:border-box}
+    body{margin:0;background:var(--void);color:var(--text);font:17px/1.6 var(--display);-webkit-font-smoothing:antialiased;transition:background .4s,color .4s}
+    a{color:inherit}
+    .wrap{max-width:1160px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
+    .skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:var(--accent);color:var(--on-accent);padding:8px 14px;z-index:99}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+    /* nav */
+    .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--void) 92%,transparent);border-bottom:1px solid var(--line)}
+    .nav__in{display:flex;align-items:center;gap:28px;height:60px}
+    .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:400;text-decoration:none;font-size:24px}
+    .gem{width:22px;height:22px;fill:var(--accent)}
+    .nav__links{display:flex;gap:22px;margin-left:auto;font-size:15px;color:var(--dim)}
+    .nav__links a{text-decoration:none}.nav__links a:hover{color:var(--text)}
+    .btn{display:inline-flex;align-items:center;height:46px;padding:0 22px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+    .btn:hover{border-color:var(--text)}
+    .btn--gold{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+    .btn--gold:hover{border-color:var(--text)}
+    .nav .btn{height:38px;padding:0 16px}
+    .mode{width:38px;height:38px;padding:0;display:grid;place-items:center;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:50%;cursor:pointer}
+    .mode svg{grid-area:1/1;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .25s}
+    .mode .moon{opacity:0;transform:rotate(-80deg) scale(.4)}
+    :root[data-theme="light"] .mode .sun{opacity:0;transform:rotate(80deg) scale(.4)}
+    :root[data-theme="light"] .mode .moon{opacity:1;transform:none}
+    .mode:hover{border-color:var(--text)}
+    @media(max-width:820px){.nav__links{display:none}.mode{margin-left:auto}}
+
+    /* hero */
+    .hero{padding:clamp(56px,9vw,120px) 0 0}
+    h1{font-family:var(--serif);font-size:clamp(50px,10vw,148px);line-height:.92;letter-spacing:-.02em;font-weight:400;margin:0;max-width:11ch}
+    .hero__lead{max-width:56ch;color:var(--dim);font-size:clamp(17px,1.6vw,20px);margin:32px 0 36px}
+    .hero__act{display:flex;gap:12px;flex-wrap:wrap}
+    .hero__note{color:var(--dim);font-size:15px;margin:22px 0 0}
+    .hero__note a{color:var(--accent)}
+
+    /* browser mock: the one memorable thing */
+    .stage{margin-top:clamp(48px,7vw,88px);position:relative}
+    .stage::before{content:"";position:absolute;left:50%;top:-1px;width:min(560px,70%);height:1px;transform:translateX(-50%);background:var(--accent);opacity:.9}
+    .win{border:1px solid var(--line);border-radius:14px 14px 0 0;background:var(--surface);overflow:hidden;border-bottom:0;box-shadow:0 -1px 0 color-mix(in srgb,var(--accent) 35%,transparent)}
+    .win__bar{display:flex;align-items:center;gap:6px;padding:10px 12px 0;background:var(--void);border-bottom:1px solid var(--line)}
+    .dots{display:flex;gap:7px;margin-right:12px;padding-bottom:10px}
+    .dots i{width:11px;height:11px;border-radius:50%;background:var(--raised);border:1px solid var(--line)}
+    .tab{font:inherit;font-size:13px;color:var(--dim);background:transparent;border:1px solid transparent;border-bottom:0;border-radius:8px 8px 0 0;padding:8px 16px;cursor:pointer;max-width:170px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .tab[aria-selected="true"]{background:var(--surface);color:var(--text);border-color:var(--line);box-shadow:inset 0 2px 0 var(--accent)}
+    .win__addr{display:flex;gap:10px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);font-size:14px;color:var(--dim)}
+    .addr{flex:1;background:var(--void);border:1px solid var(--line);border-radius:8px;padding:7px 14px;font-family:var(--mono);font-size:13px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .shield{color:var(--accent);font-size:13px;font-weight:600;white-space:nowrap}
+    .page{min-height:340px;padding:clamp(28px,5vw,56px);display:grid;gap:22px;align-content:center;justify-items:start}
+    .page h2{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(30px,4vw,50px);letter-spacing:-.015em;line-height:1.05}
+    .page p{margin:0;color:var(--dim);max-width:52ch}
+    .search{width:min(520px,100%);border:1px solid var(--accent);border-radius:8px;padding:13px 16px;color:var(--dim);background:var(--void)}
+    .chips{display:flex;gap:10px;flex-wrap:wrap}
+    .chip{border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:14px;background:var(--raised)}
+    .ledger{font-family:var(--mono);font-size:13px;color:var(--dim);display:grid;gap:6px}
+    .ledger b{color:var(--accent);font-weight:600}
+    .caption{text-align:left;color:var(--dim);font-size:14px;margin:14px 0 0}
+
+    /* sections */
+    .section{padding:clamp(72px,10vw,140px) 0;border-top:1px solid var(--line)}
+    .section--alt{background:var(--surface)}
+    .head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr);gap:clamp(24px,5vw,80px);align-items:end;margin-bottom:clamp(40px,6vw,80px)}
+    .label{color:var(--accent);font-size:15px;font-weight:600;margin:0 0 18px}
+    h2.t{font-family:var(--serif);font-size:clamp(38px,5.8vw,80px);line-height:1;letter-spacing:-.015em;font-weight:400;margin:0}
+    .lead{color:var(--dim);margin:0;max-width:48ch}
+    @media(max-width:820px){.head{grid-template-columns:1fr;align-items:start}}
+
+    .trio{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+    .trio article{padding:32px 32px 8px 0;border-right:1px solid var(--line);margin-right:32px}
+    .trio article:last-child{border:0;margin:0}
+    .trio h3{font-family:var(--serif);font-weight:400;font-size:27px;line-height:1.15;letter-spacing:-.01em;margin:0 0 14px}
+    .trio p{margin:0;color:var(--dim);font-size:16px}
+    @media(max-width:820px){.trio{grid-template-columns:1fr}.trio article{border-right:0;margin:0;padding:28px 0;border-bottom:1px solid var(--line)}}
+
+    .pull{font-family:var(--serif);font-size:clamp(32px,5.2vw,68px);line-height:1.02;letter-spacing:-.015em;font-weight:400;margin:0 0 clamp(40px,6vw,72px);max-width:20ch;padding-left:clamp(16px,2vw,28px);border-left:4px solid var(--accent)}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px)}
+    .cols h3{font-family:var(--serif);font-weight:400;font-size:25px;letter-spacing:-.01em;margin:0 0 18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+    .cols ul{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+    .cols li{position:relative;padding-left:30px;color:var(--dim);font-size:16px}
+    .cols li b{color:var(--text)}
+    .yes li::before,.no li::before,.next li::before{position:absolute;left:0;top:0;font-weight:700}
+    .yes li::before{content:"✓";color:var(--accent)}
+    .no li::before{content:"✕";color:var(--dim)}
+    .next li::before{content:"○";color:var(--dim)}
+    @media(max-width:820px){.cols{grid-template-columns:1fr}}
+
+    /* palette + theme */
+    .palette{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:28px}
+    .sw{padding:80px 14px 14px;background:var(--c);font-size:13px;display:grid;gap:2px;color:#f5f5f5}
+    .sw code{font-family:var(--mono);font-size:12px;opacity:.7}
+    .sw--key{flex:1;color:#000}
+    .sw:nth-child(4){color:#000}.sw:nth-child(5){color:#000}
+    @media(max-width:820px){.palette{grid-template-columns:repeat(3,1fr)}.sw{padding-top:48px}}
+    .presets{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 clamp(40px,6vw,72px)}
+    .presets span{color:var(--dim);font-size:15px;margin-right:6px}
+    .pre{font:inherit;font-size:14px;font-weight:600;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:8px;padding:9px 14px 9px 12px;cursor:pointer;display:inline-flex;gap:9px;align-items:center}
+    .pre i{width:12px;height:12px;border-radius:50%;background:var(--p)}
+    .pre[aria-pressed="true"]{border-color:var(--text)}
+    .pre:hover{border-color:var(--dim)}
+    .col__text{color:var(--dim);margin:0}
+    .plain li{padding-left:0}
+
+    /* build */
+    .code{margin:0;background:var(--void);border:1px solid var(--line);border-radius:12px;padding:clamp(20px,3vw,36px);font:15px/1.9 var(--mono);overflow-x:auto;position:relative}
+    .code span{color:var(--accent);user-select:none}
+    .copy{position:absolute;right:14px;top:14px;font:inherit;font-size:13px;font-family:var(--display);color:var(--text);background:var(--raised);border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer}
+    .note{color:var(--dim);font-size:15px;margin:22px 0 0;max-width:62ch}
+    .note a,.foot a{color:var(--text)}
+
+    .authors{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,360px));gap:24px}
+    .author{display:flex;gap:18px;align-items:center;border-top:1px solid var(--line);padding-top:22px}
+    .av{width:64px;height:64px;border-radius:50%;background:var(--raised);border:1px solid var(--accent);display:grid;place-items:center;color:var(--accent);font-weight:800;font-size:22px;letter-spacing:-.04em;flex:none}
+    .author p{margin:0}.author .n{font-family:var(--serif);font-weight:400;font-size:24px}.author .b{color:var(--dim);font-size:15px}
+    @media(max-width:600px){.authors{grid-template-columns:1fr}}
+
+    .foot{border-top:1px solid var(--line);padding:56px 0 64px;color:var(--dim);font-size:14px}
+    .foot__big{font-family:var(--serif);font-size:clamp(52px,17vw,240px);font-weight:400;letter-spacing:-.025em;line-height:.9;color:var(--text);margin:0 0 44px;overflow:hidden}
+    .foot__big em{font-style:normal;color:var(--accent)}
+    .foot__in{display:flex;gap:36px;flex-wrap:wrap;align-items:flex-start;justify-content:space-between}
+    .foot__links{display:flex;gap:22px;flex-wrap:wrap}
+    .foot p{margin:0 0 8px;max-width:52ch}
+
+    .dl{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(20px,4vw,48px)}
+    .dl__main{border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:22px;padding:clamp(24px,4vw,44px);background:var(--surface);display:flex;flex-direction:column;gap:16px;min-height:340px}
+    .dl__tag{margin:0;color:var(--accent);font-weight:700;font-size:15px}
+    .dl__os{font-family:var(--serif);font-weight:400;font-size:clamp(42px,6.4vw,84px);line-height:1;letter-spacing:-.02em;margin:0}
+    .dl__sub{margin:0;color:var(--dim);max-width:46ch}
+    .dl__act{display:flex;gap:12px;flex-wrap:wrap;margin-top:auto;padding-top:12px}
+    .plats{list-style:none;margin:0;padding:0;display:grid;gap:12px;align-content:start}
+    .plat{width:100%;text-align:left;font:inherit;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:18px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;cursor:pointer}
+    .plat:hover{border-color:var(--dim)}
+    .plat[aria-pressed="true"]{border-color:var(--accent);background:var(--surface)}
+    .plat b{font-size:19px;letter-spacing:-.01em}
+    .plat small{display:block;color:var(--dim);font-size:14px;margin-top:2px}
+    .badge{font-size:13px;font-weight:700;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--dim);white-space:nowrap}
+    .badge--on{color:var(--on-accent);background:var(--accent);border-color:var(--accent)}
+    @media(max-width:820px){.dl{grid-template-columns:1fr}.dl__main{min-height:0}}
+
+    /* one entrance, hero only */
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+    .hero h1,.hero .hero__lead,.hero .hero__act,.hero .stage{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+    .hero .hero__lead{animation-delay:.12s}.hero .hero__act{animation-delay:.2s}.hero .stage{animation-delay:.32s}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
-  <a class="nav__brand" href="#top" aria-label="Gold-Web home">
-    <img src="assets/goldweb.png" alt="Gold-Web" width="1024" height="207">
-  </a>
-  <nav class="nav__links" aria-label="Sections">
-    <a href="#what">What it is</a>
-    <a href="#privacy">Privacy</a>
-    <a href="#design">Design</a>
-    <a href="#status">Status</a>
-    <a href="#build">Build</a>
-    <a href="#authors">Authors</a>
-  </nav>
-  <a class="nav__repo" href="https://github.com/mrfrenchguy23445/gold-web">GitHub</a>
+  <div class="wrap nav__in">
+    <a class="brand" href="#top"><svg class="gem" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2" transform="rotate(45 12 12)"/></svg>Gold-Web</a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#what">What it is</a><a href="#privacy">Privacy</a><a href="#design">Design</a><a href="#status">Status</a><a href="#download">Download</a><a href="#build">Build</a><a href="#authors">Authors</a>
+    </nav>
+    <button class="mode" id="mode" type="button" aria-label="Switch to light mode" title="Light mode"><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
+    <a class="btn btn--gold" href="#download">Download</a>
+  </div>
 </header>
 
 <main id="main">
-
   <section class="hero" id="top">
-    <div class="wrap hero__inner">
-      <img class="hero__logo" src="assets/goldweb.png" alt="Gold-Web" width="1024" height="207">
-      <h1 class="hero__title">A gaming and privacy browser.</h1>
-      <p class="hero__lead">
-        Sleek and stylish. Gold-Web renders the web with
-        Chromium&rsquo;s engine, embedded through CEF. The window, the tabs, the
-        interface and the privacy defaults are ours.
-      </p>
-      <div class="hero__actions">
-        <a class="btn btn--gold" href="#build">Build it from source</a>
+    <div class="wrap">
+      <h1>A gaming and privacy browser.</h1>
+      <p class="hero__lead">Gold-Web uses Chromium to display websites, with the engine built into the app through CEF. Everything around it, from the tabs and window to the interface and privacy settings, is designed as part of Gold-Web.</p>
+      <div class="hero__act">
+        <a class="btn btn--gold" href="#download" id="heroDl">Download</a>
         <a class="btn" href="https://github.com/mrfrenchguy23445/gold-web">View the source</a>
       </div>
+      <p class="hero__note">Gold-Web is still being developed, and there is plenty more planned. <a href="#status">See what works so far.</a></p>
 
-      <figure class="peek">
-        <img class="peek__shot" src="assets/ui.png" width="1280" height="800"
-             alt="The Gold-Web window: title bar, tab strip, address bar and a new tab page, all in black and gold.">
-        <figcaption class="peek__cap">A sneak peek of absolute cinema.</figcaption>
-      </figure>
-
-      <p class="hero__note">
-        We are cr
-        browses. <a href="#status">See what works.</a>
-      </p>
+      <div class="stage">
+        <div class="win" aria-label="Interactive Gold-Web window preview">
+          <div class="win__bar">
+            <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div role="tablist" aria-label="Preview tabs" style="display:flex;gap:4px;min-width:0">
+              <button class="tab" role="tab" aria-selected="true" data-t="0">New tab</button>
+              <button class="tab" role="tab" aria-selected="false" data-t="1">Eaglercraft</button>
+              <button class="tab" role="tab" aria-selected="false" data-t="2">Protection Centre</button>
+            </div>
+          </div>
+          <div class="win__addr"><span aria-hidden="true">←&nbsp;&nbsp;→&nbsp;&nbsp;⟳</span><div class="addr" id="addr">gold://newtab</div><span class="shield" id="shield">14 blocked</span></div>
+          <div class="page" id="page"></div>
+        </div>
+        <p class="caption">A sneak peek of absolute cinema. Click the tabs, then try the presets under Design.</p>
+      </div>
     </div>
   </section>
 
   <section class="section" id="what">
     <div class="wrap">
-      <p class="eyebrow">What it is</p>
-      <h2 class="section__title">Built from scratch by our amazing developer team.</h2>
-      <p class="section__lead">
-        Gold-Web doesn&rsquo;t restyle Chrome or patch Firefox. It embeds the
-        Chromium Embedded Framework and builds the browser around it.
-      </p>
-      <div class="cards">
-        <article class="card">
-          <h3 class="card__title">Chromium&rsquo;s engine, without Chrome&rsquo;s habits</h3>
-          <p>
-            Pages render exactly as Chromium renders them, so WebGL and
-            WebAssembly games like eaglercraft get the same treatment they would in an ordinary
-            Chromium browser. What Gold Web doesn&rsquo;t take on is Chrome&rsquo;s
-            telemetry, its sponsored tiles, or the parts of the interface that
-            watch you.
-          </p>
-        </article>
-        <article class="card">
-          <h3 class="card__title">Our interface, our policy</h3>
-          <p>
-            The window, tabs, address bar, menus, our pages and the privacy
-            policy are written by us: a C++ shell with a closed web interface.
-            The interface draws the browser. It doesn&rsquo;t get to decide
-            what&rsquo;s private.
-          </p>
-        </article>
-        <article class="card">
-          <h3 class="card__title">Yours to restyle</h3>
-          <p>
-            Every colour, corner and spacing value is a design token. Twelve
-            presets ship, and switching between them, or inventing your own, is
-            a data change rather than a rewrite.
-          </p>
-        </article>
+      <div class="head">
+        <div><p class="label">What it is</p><h2 class="t">Built from scratch by our amazing developer team.</h2></div>
+        <p class="lead">Gold-Web is its own browser, not a reskinned version of Chrome or a modified copy of Firefox. It uses the Chromium Embedded Framework (CEF) as its rendering engine, with the rest of the browser built around it.</p>
+      </div>
+      <div class="trio">
+        <article><h3>Chromium’s engine, without Chrome’s habits</h3><p>Websites use Chromium’s rendering engine, including WebGL and WebAssembly content such as Eaglercraft. The browser interface is separate from that engine, so Gold-Web can provide its own features without bringing along Chrome’s sponsored tiles or browser interface.</p></article>
+        <article><h3>Our interface, our policy</h3><p>We build the window, tabs, address bar, menus and built-in pages ourselves. The browser uses a C++ shell with a web-based interface, while privacy-related behaviour is handled separately from the interface.</p></article>
+        <article><h3>Yours to restyle</h3><p>Colours, corner styles and spacing are controlled by design tokens. Gold-Web includes twelve presets, and you can switch between them or create your own without rewriting the interface.</p></article>
       </div>
     </div>
   </section>
 
   <section class="section section--alt" id="privacy">
     <div class="wrap">
-      <p class="eyebrow">Privacy</p>
-      <h2 class="section__title">Privacy, stated honestly.</h2>
-      <p class="section__lead">
-        The interface keeps one rule: never dress up a claim it can&rsquo;t back
-        up. So here is the plain version.
-      </p>
-
-      <blockquote class="pullquote">
-        Blocks known trackers. Not &ldquo;makes you anonymous&rdquo;.
-      </blockquote>
-
+      <div class="head">
+        <div><p class="label">Privacy</p><h2 class="t">Privacy, stated honestly.</h2></div>
+        <p class="lead">We want the privacy information to be clear about what the browser actually does. Here is what is already in place, along with the limits of the current protection.</p>
+      </div>
+      <blockquote class="pull" style="margin-left:0;margin-right:0">Blocks known trackers. Not “makes you anonymous”.</blockquote>
       <div class="cols">
-        <div class="col">
-          <h3 class="col__title">True today</h3>
-          <ul class="ticks">
-            <li>Tracker and ad blocking: a curated host list, applied to subresources before they leave the machine. A first cut, with a hand-curated list and no per-site control yet.</li>
-            <li>Nothing Gold-Web adds sends anything anywhere. No accounts, no sync, no usage reports.</li>
-            <li>No sponsored tiles and no &ldquo;recommended&rdquo; anything.</li>
-            <li>History kept on your device, in a small file beside the profile.</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h3 class="col__title">What it doesn&rsquo;t claim</h3>
-          <ul class="crosses">
-            <li>It doesn&rsquo;t make you anonymous, and it isn&rsquo;t a network you route through. It blocks known trackers; it won&rsquo;t hide you from a site that already knows you.</li>
-            <li>It won&rsquo;t defeat a determined fingerprint.</li>
-            <li>Blocking is a curated list, not a promise to catch everything.</li>
-            <li>Today it&rsquo;s a first cut: a curated list, subresources only, no per-site control yet.</li>
-          </ul>
-        </div>
+        <div><h3>True today</h3>
+          <ul class="yes">
+            <li>Tracker and ad blocking currently use a hand-curated host list. It is an early version and does not yet offer per-site controls.</li>
+            <li>Gold-Web does not add account services, sync or usage reports, and it does not send that information elsewhere.</li>
+            <li>No sponsored tiles and no “recommended” anything.</li>
+            <li>Browsing history is stored locally on your device, alongside the browser profile.</li>
+          </ul></div>
+        <div><h3>What it doesn’t claim</h3>
+          <ul class="no">
+            <li>Gold-Web does not make you anonymous or route your traffic through another network. It can block known trackers, but a website may still recognise you through information it already has.</li>
+            <li>It won’t defeat a determined fingerprint.</li>
+            <li>The blocking system relies on a curated list, so it will not catch every tracker.</li>
+            <li>The current version applies its curated list to subresources and does not yet include per-site controls.</li>
+          </ul></div>
       </div>
     </div>
   </section>
 
   <section class="section" id="design">
     <div class="wrap">
-      <p class="eyebrow">Gold UI</p>
-      <h2 class="section__title">Black surface, one gold accent, used sparingly.</h2>
-      <p class="section__lead">
-        The default theme is deliberately flat: no gradients, no glass, no
-        decorative shadow. Deep black panels and a single gold for anything
-        interactive or on. If everything glows, nothing communicates.
-      </p>
-
-      <ul class="swatches" aria-label="Default palette">
-        <li class="swatch" style="--c:#000000"><span class="swatch__chip"></span><span class="swatch__name">Void</span><code>#000000</code></li>
-        <li class="swatch" style="--c:#0a0a0a"><span class="swatch__chip"></span><span class="swatch__name">Surface</span><code>#0a0a0a</code></li>
-        <li class="swatch" style="--c:#141414"><span class="swatch__chip"></span><span class="swatch__name">Raised</span><code>#141414</code></li>
-        <li class="swatch" style="--c:#f5f5f5"><span class="swatch__chip"></span><span class="swatch__name">Text</span><code>#f5f5f5</code></li>
-        <li class="swatch" style="--c:#a3a3a3"><span class="swatch__chip"></span><span class="swatch__name">Secondary</span><code>#a3a3a3</code></li>
-        <li class="swatch swatch--key" style="--c:#e0b84c"><span class="swatch__chip"></span><span class="swatch__name">Accent</span><code>#e0b84c</code></li>
+      <div class="head">
+        <div><p class="label">Gold UI</p><h2 class="t">Black surface, one gold accent, used sparingly.</h2></div>
+        <p class="lead">The default theme keeps things simple, using black surfaces with gold reserved for important details and interactive elements. There are no gradients, glass effects or decorative shadows competing for attention.</p>
+      </div>
+      <ul class="palette" aria-label="Default palette" style="list-style:none;padding:0">
+        <li class="sw" style="--c:#000;border-right:1px solid #242424"><b>Void</b><code>#000000</code></li>
+        <li class="sw" style="--c:#0a0a0a"><b>Surface</b><code>#0a0a0a</code></li>
+        <li class="sw" style="--c:#141414"><b>Raised</b><code>#141414</code></li>
+        <li class="sw" style="--c:#f5f5f5"><b>Text</b><code>#f5f5f5</code></li>
+        <li class="sw" style="--c:#a3a3a3"><b>Secondary</b><code>#a3a3a3</code></li>
+        <li class="sw sw--key" style="--c:#e0b84c"><b>Accent</b><code>#e0b84c</code></li>
       </ul>
-
+      <div class="presets" id="presets"><span>Try a preset on this page:</span></div>
       <div class="cols">
-        <div class="col">
-          <h3 class="col__title">What you can change</h3>
-          <ul class="plain">
+        <div><h3>What you can change</h3>
+          <ul class="next plain">
             <li><b>Preset</b>: twelve named themes, from Gold to Daylight.</li>
             <li><b>Accent</b>: any colour. The rest of the scale is derived from it, and contrast is computed rather than hardcoded.</li>
             <li><b>Tone</b>: how black the surfaces are.</li>
             <li><b>Corners, density, motion and transparency</b>, from square to round, compact to spacious, full to off.</li>
             <li><b>Background</b>: solid, aura, mesh, grid or image, tinted from your accent.</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h3 class="col__title">Why it holds together</h3>
-          <p class="col__text">
-            The interface only ever reads tokens. No component knows a setting
-            exists, or what colour a preset picked. It asks for an accent or a
-            radius and gets a value, which is why a new theme is a data change
-            and nothing drifts out of alignment when you pick one.
-          </p>
-        </div>
+          </ul></div>
+        <div><h3>Why it holds together</h3>
+          <p class="col__text">Components use the same design tokens rather than defining their own colours and spacing. When you choose a different theme, each part of the interface reads the updated values, helping the layout stay consistent.</p></div>
       </div>
     </div>
   </section>
 
   <section class="section section--alt" id="status">
     <div class="wrap">
-      <p class="eyebrow">Status</p>
-      <h2 class="section__title">Where it is today.</h2>
-      <p class="section__lead">
-        Gold-Web is early and Linux-first. The roadmap is public and updated as
-        things land.
-      </p>
+      <div class="head">
+        <div><p class="label">Status</p><h2 class="t">Where it is today.</h2></div>
+        <p class="lead">Gold-Web is still in its early stages, with Linux as the first supported platform. The list below separates features that are available now from the work planned for later.</p>
+      </div>
       <div class="cols">
-        <div class="col">
-          <h3 class="col__title">Working today</h3>
-          <ul class="ticks">
+        <div><h3>Working today</h3>
+          <ul class="yes">
             <li>A frameless window with our own title bar and window buttons.</li>
             <li>Tabs, each backed by its own real browser: open, close, switch and drag to reorder.</li>
             <li>The tab strip can sit on the top, left or right edge.</li>
@@ -203,96 +297,168 @@
             <li>On-device history: a searchable list of every visit, clearable in one action.</li>
             <li>Tracker blocking, first cut, with counts in the Protection Centre.</li>
             <li>Every surface follows the theme, live.</li>
-          </ul>
-        </div>
-        <div class="col">
-          <h3 class="col__title">Next</h3>
-          <ul class="plain">
-            <li>A per-site shield: see and change what&rsquo;s blocked for one site.</li>
+          </ul></div>
+        <div><h3>Next</h3>
+          <ul class="next">
+            <li>A per-site shield: see and change what’s blocked for one site.</li>
             <li>Data controls: cookies, cache and site data, reviewed and cleared.</li>
             <li>Encrypted DNS with a named resolver you can choose, and an HTTPS-only mode.</li>
-            <li>A page that shows exactly what Gold-Web itself connects to, and CEF&rsquo;s own background services switched off.</li>
-            <li>A fingerprinting self-test that explains what it changes and what it can&rsquo;t.</li>
+            <li>A page that shows exactly what Gold-Web itself connects to, and CEF’s own background services switched off.</li>
+            <li>A fingerprinting self-test that explains what it changes and what it can’t.</li>
             <li>Workspaces, bookmarks, downloads and passwords.</li>
             <li>Linux packages (.deb, AppImage, Flatpak) and signed updates.</li>
             <li>Windows, via the same CEF engine.</li>
-          </ul>
+          </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="download">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="label">Download</p><h2 class="t">Get Gold-Web for your system.</h2></div>
+        <p class="lead">Gold-Web is in early development. We detect your system and show what is actually available for it, so you are never sent to a download that doesn’t exist.</p>
+      </div>
+      <div class="dl">
+        <div class="dl__main" aria-live="polite">
+          <p class="dl__tag" id="dlTag"></p>
+          <h3 class="dl__os" id="dlOs"></h3>
+          <p class="dl__sub" id="dlText"></p>
+          <div class="dl__act" id="dlAct"></div>
         </div>
+        <ul class="plats" id="plats" aria-label="Platforms"></ul>
       </div>
     </div>
   </section>
 
   <section class="section" id="build">
     <div class="wrap">
-      <p class="eyebrow">Build it</p>
-      <h2 class="section__title">Four commands from a clean checkout.</h2>
-      <p class="section__lead">
-        You need a C++ toolchain, CMake, Ninja, and the CEF binary distribution
-        that the fetch script pins.
-      </p>
-      <pre class="code"><code>./scripts/fetch-cef.sh
-cmake -S app -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
-cmake --build build
-./build/goldweb</code></pre>
-      <p class="section__note">
-        Linux only for now. Windows and macOS are planned for v1.0. Full detail
-        lives in
-        <a href="https://github.com/mrfrenchguy23445/gold-web/blob/main/docs/BUILDING_LINUX.md"><code>docs/BUILDING_LINUX.md</code></a>.
-      </p>
+      <div class="head">
+        <div><p class="label">Build it</p><h2 class="t">Four commands from a clean checkout.</h2></div>
+        <p class="lead">To build Gold-Web, you will need a C++ toolchain, CMake, Ninja and the CEF binary distribution used by the project’s fetch script.</p>
+      </div>
+      <pre class="code"><button class="copy" id="copy" type="button">Copy</button><code id="cmd"><span>$ </span>./scripts/fetch-cef.sh
+<span>$ </span>cmake -S app -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+<span>$ </span>cmake --build build
+<span>$ </span>./build/goldweb</code></pre>
+      <p class="note">Gold-Web currently builds on Linux. Windows and macOS are planned for v1.0. The full setup instructions are in <a href="https://github.com/mrfrenchguy23445/gold-web/blob/main/docs/BUILDING_LINUX.md">docs/BUILDING_LINUX.md</a>.</p>
     </div>
   </section>
 
-  <!-- ------------------------------------------------------------ authors -->
   <section class="section section--alt" id="authors">
     <div class="wrap">
-      <p class="eyebrow">Authors</p>
-      <h2 class="section__title">Who builds it.</h2>
-      <p class="section__lead">
-        Gold-Web is built by hand, by the both of us, in the open.
-      </p>
+      <div class="head">
+        <div><p class="label">Authors</p><h2 class="t">Who builds it.</h2></div>
+        <p class="lead">Gold-Web is developed by the two of us in the open. You can follow the work and explore the source code on GitHub.</p>
+      </div>
       <ul class="authors">
-        <li class="author">
-          <img class="author__pic" src="assets/choice21.png" alt="Choice21"
-               width="256" height="256" loading="lazy">
-          <p class="author__name">Choice21</p>
-          <p class="author__bio">Systems Engineer &amp; Developer</p>
-        </li>
-        <li class="author">
-          <img class="author__pic" src="assets/french.jpeg" alt="French"
-               width="256" height="256" loading="lazy">
-          <p class="author__name">French</p>
-          <p class="author__bio">I like coding</p>
-        </li>
+        <li class="author"><div class="av" aria-hidden="true">C</div><div><p class="n">Choice21</p><p class="b">Systems Engineer &amp; Developer</p></div></li>
+        <li class="author"><div class="av" aria-hidden="true">F</div><div><p class="n">French</p><p class="b">I like coding</p></div></li>
       </ul>
     </div>
   </section>
 </main>
 
 <footer class="foot">
-  <div class="wrap foot__inner">
-    <div class="foot__mark">
-      <svg class="foot__gem" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="7" y="7" width="10" height="10" rx="2" transform="rotate(45 12 12)"></rect>
-      </svg>
-      <img class="foot__wordmark" src="assets/goldweb.png" alt="Gold-Web" width="1024" height="207">
+  <div class="wrap">
+    <p class="foot__big" aria-hidden="true">Gold<em>-</em>Web</p>
+    <div class="foot__in">
+      <div>
+        <p>Gold-Web’s own code is licensed separately from CEF and Chromium, which keep their own licenses. See the <a href="https://github.com/mrfrenchguy23445/gold-web/blob/main/LICENSE">LICENSE</a>.</p>
+        <p>No telemetry. No analytics. The only thing this page loads from elsewhere is its typefaces, Redaction and Nunito, from Google Fonts.</p>
+        <p>Made by hand, in the open.</p>
+      </div>
+      <nav class="foot__links" aria-label="Project links">
+        <a href="https://github.com/mrfrenchguy23445/gold-web">Source</a>
+        <a href="https://github.com/mrfrenchguy23445/gold-web/blob/main/docs/ARCHITECTURE.md">Architecture</a>
+        <a href="https://github.com/mrfrenchguy23445/gold-web/blob/main/docs/ROADMAP.md">Roadmap</a>
+        <a href="https://github.com/mrfrenchguy23445/gold-web/blob/main/docs/DESIGN.md">Design</a>
+      </nav>
     </div>
-    <nav class="foot__links" aria-label="Project links">
-      <a href="https://github.com/mrfrenchguy23445/gold-web">Source</a>
-      <a href="https://github.com/mrfrenchguy23445/gold-web/blob/main/docs/ARCHITECTURE.md">Architecture</a>
-      <a href="https://github.com/mrfrenchguy23445/gold-web/blob/main/docs/ROADMAP.md">Roadmap</a>
-      <a href="https://github.com/mrfrenchguy23445/gold-web/blob/main/docs/DESIGN.md">Design</a>
-    </nav>
-    <p class="foot__fine">
-      Gold-Web&rsquo;s own code is licensed separately from CEF and Chromium,
-      which keep their own licenses. See the
-      <a href="https://github.com/mrfrenchguy23445/gold-web/blob/main/LICENSE">LICENSE</a>.
-    </p>
-    <p class="foot__fine foot__fine--dim">
-      No telemetry. No analytics. This page loads nothing from anywhere else.
-    </p>
-    <p class="foot__sign">Made by hand, in the open.</p>
   </div>
 </footer>
 
+<script>
+  (function(){
+    var pages=[
+      {a:"gold://newtab",s:"14 blocked",h:'<h2>Search, or type an address.</h2><div class="search">Search the web</div><div class="chips"><span class="chip">History</span><span class="chip">Protection Centre</span><span class="chip">Settings</span></div><p>No feeds. No sponsored tiles.</p>'},
+      {a:"https://eaglercraft.example",s:"3 blocked",h:'<h2>WebGL and WebAssembly, running natively.</h2><p>Chromium renders the page. Gold-Web draws everything around it.</p><div class="ledger"><span>engine&nbsp;&nbsp;&nbsp;<b>Chromium via CEF</b></span><span>webgl&nbsp;&nbsp;&nbsp;&nbsp;<b>on</b></span><span>wasm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>on</b></span></div>'},
+      {a:"gold://protection",s:"Shield on",h:'<h2>Blocks known trackers. Not “makes you anonymous”.</h2><p>Counts come from the curated host list. Per-site controls are next.</p><div class="ledger"><span>blocked today&nbsp;&nbsp;<b>14</b></span><span>list&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>hand-curated</b></span><span>data sent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>none</b></span></div>'}
+    ];
+    var tabs=document.querySelectorAll(".tab"),pg=document.getElementById("page"),ad=document.getElementById("addr"),sh=document.getElementById("shield");
+    function show(i){
+      tabs.forEach(function(t,k){t.setAttribute("aria-selected",k===i)});
+      pg.innerHTML=pages[i].h;ad.textContent=pages[i].a;sh.textContent=pages[i].s;
+    }
+    tabs.forEach(function(t){t.addEventListener("click",function(){show(+t.dataset.t)})});
+    show(0);
+
+    var presets=[["Gold","#e0b84c","dark"],["Ember","#ff6b3d","dark"],["Mint","#4cd9a0","dark"],["Ice","#5cc8ff","dark"],["Violet","#a78bfa","dark"],["Rose","#ff6b9d","dark"]];
+    var box=document.getElementById("presets"),root=document.documentElement;
+    presets.forEach(function(p,i){
+      var b=document.createElement("button");b.className="pre";b.type="button";
+      b.style.setProperty("--p",p[1]);b.setAttribute("aria-pressed",i===0);
+      b.innerHTML="<i></i>"+p[0];
+      b.addEventListener("click",function(){
+        root.style.setProperty("--accent-base",p[1]);
+        box.querySelectorAll(".pre").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
+      });
+      box.appendChild(b);
+    });
+
+    var mb=document.getElementById("mode");
+    function sync(){var l=root.getAttribute("data-theme")==="light";mb.setAttribute("aria-label",l?"Switch to dark mode":"Switch to light mode");mb.title=l?"Dark mode":"Light mode"}
+    mb.addEventListener("click",function(){
+      var n=root.getAttribute("data-theme")==="light"?"dark":"light";
+      root.setAttribute("data-theme",n);
+      try{localStorage.setItem("gw-theme",n)}catch(e){}
+      sync();
+    });
+    sync();
+
+    var RP="https://github.com/mrfrenchguy23445/gold-web";
+    var OS={
+      linux:{n:"Linux",st:"Build from source",b:"Available now",on:1,t:"Linux is the first supported platform. For now you build Gold-Web from source in four commands. Packages (.deb, AppImage, Flatpak) and signed updates are planned.",a:[["Build from source","#build",1],["Read the Linux guide",RP+"/blob/main/docs/BUILDING_LINUX.md"]]},
+      windows:{n:"Windows",st:"No build yet",b:"Planned for v1.0",t:"Windows support is planned and will use the same CEF engine. There is no Windows build yet.",a:[["Follow progress on GitHub",RP,1],["See the roadmap",RP+"/blob/main/docs/ROADMAP.md"]]},
+      macos:{n:"macOS",st:"No build yet",b:"Planned for v1.0",t:"macOS support is planned for v1.0. There is no macOS build yet.",a:[["Follow progress on GitHub",RP,1],["See the roadmap",RP+"/blob/main/docs/ROADMAP.md"]]}
+    };
+    function detect(){
+      var p="";try{p=((navigator.userAgentData&&navigator.userAgentData.platform)||navigator.platform||"")+" "+navigator.userAgent}catch(e){}
+      p=p.toLowerCase();
+      if(/android|iphone|ipad|ipod|cros/.test(p))return"mobile";
+      if(/mac/.test(p))return"macos";
+      if(/win/.test(p))return"windows";
+      if(/linux|x11|bsd/.test(p))return"linux";
+      return"other";
+    }
+    var me=detect(),sel=OS[me]?me:"linux";
+    var pl=document.getElementById("plats");
+    function drawDl(){
+      var o=OS[sel];
+      document.getElementById("dlTag").textContent=OS[me]?(sel===me?"Detected your system":"Showing "+o.n):(me==="mobile"?"Gold-Web is a desktop browser":"We couldn’t detect your system");
+      document.getElementById("dlOs").textContent=o.n;
+      document.getElementById("dlText").textContent=o.t;
+      var act=document.getElementById("dlAct");act.textContent="";
+      o.a.forEach(function(x){var a=document.createElement("a");a.className="btn"+(x[2]?" btn--gold":"");a.href=x[1];a.textContent=x[0];act.appendChild(a)});
+      pl.textContent="";
+      Object.keys(OS).forEach(function(k){
+        var v=OS[k],li=document.createElement("li"),b=document.createElement("button");
+        b.type="button";b.className="plat";b.setAttribute("aria-pressed",k===sel);
+        b.innerHTML="<span><b>"+v.n+"</b><small>"+(k===me?"Your system · ":"")+v.st+"</small></span><span class=\"badge"+(v.on?" badge--on":"")+"\">"+v.b+"</span>";
+        b.addEventListener("click",function(){sel=k;drawDl()});
+        li.appendChild(b);pl.appendChild(li);
+      });
+    }
+    drawDl();
+    if(OS[me])document.getElementById("heroDl").textContent="Download for "+OS[me].n;
+
+    var cp=document.getElementById("copy");
+    cp.addEventListener("click",function(){
+      var txt=document.getElementById("cmd").textContent.replace(/^\$ /gm,"");
+      try{navigator.clipboard.writeText(txt).then(function(){cp.textContent="Copied"})}catch(e){cp.textContent="Select to copy"}
+      setTimeout(function(){cp.textContent="Copy"},1600);
+    });
+  })();
+</script>
 </body>
 </html>
